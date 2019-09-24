@@ -24,7 +24,7 @@ export class Square {
          let p = null;
          let td = $('#' + this.id + ' .player');
          if (td) {
-             let name = $('#' + this.id + ' .name');
+             let name = $('.player-name', td).text();
              p = new Player(name);
          }
          return p
@@ -43,9 +43,9 @@ export class Square {
          let w = null;
          let td = $('#' + this.id + ' .weapon');
          if (td) {
-             let name = $('#' + this.id + ' .weapon-name');
-             let image = $('#' + this.id + ' .weapon-image');
-             let damage = $('#' + this.id + ' .damage');
+             let name = $('.weapon-name', td).text();
+             let image = $('.weapon-image', td).text();
+             let damage = $('.damage', td).text();
              w = new Weapon(name, image, damage);
          }
          return w
