@@ -1,0 +1,27 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link href="css.css" rel="stylesheet">
+    <title>Board game</title>
+</head>
+
+<body>
+    <div id='title'>
+        <p>MY BOARD GAME!</p>
+    </div>
+    <div id='myApp'></div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="module">
+        import { App } from './App.js';
+
+            $(function () {
+                var app = new App(8);
+            });
+       </script>
+
+</body>
+
+</html>
