@@ -8,13 +8,13 @@ export class App {
         this.board = this.initBoard(size);
     }
 
-    initBoard(size, players, weapons) {
-        players = [new Player('Player1',
+    initBoard(size) {
+        const players = [new Player('Player1',
                 '<img src="images/alien.png">'),
             new Player('Player2',
                 '<img src="images/astronaut.png">')
         ];
-        weapons = [new Weapon('Asteroid',
+        const weapons = [new Weapon('Asteroid',
                 '<img src="images/asteroid.png">',
                 20),
             new Weapon('Comet',
