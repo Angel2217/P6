@@ -12,16 +12,16 @@ export class Player {
       }
   
     }
+
   
     _createElem() {
       let elem = $('<div>')
         .attr('id', this.name)
         .addClass('player')
         .append('<div class="player-name">' + this.name + '</div>')
-        .append('<div class="player-image">' + this.image + '</div>');
-  
+        .append('<div class="player-image">' + `<img src = images/${this.image}>` + '</div>');
       return elem
     }
     
-    
+   
   } 
