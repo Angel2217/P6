@@ -2,6 +2,7 @@ body {
   background-color: black;
   color: white;
   font-family: calibri;
+  margin: 20px 80px;
 }
 
 table {
@@ -39,7 +40,31 @@ img {
 }
 
 #title {
-  font-size: 25px;
+  font-size: 40px;
   text-align: center;
 }
 
+.panel {
+  border: 3px solid white;
+  width: 200px;
+  height: 330px;
+  text-align: center;
+  padding: 20px;
+}
+
+.panel > div {
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.panel img {
+  width: 50px;
+  height: 50px;
+}
+
+#myApp {
+display: flex; flex-direction: row; }
+#myTable { order: 2; }
+#Panel1{ order: 1; }
+#Panel2 { order: 3; }
+}
