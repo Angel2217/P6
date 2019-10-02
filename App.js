@@ -4,11 +4,21 @@ import { Weapon } from './Weapon.js';
 import { Panel } from './Panel.js';
 
 
-const players = [new Player('Player1',
-        'alien.png'),
-    new Player('Player2',
-        'astronaut.png')
+const startWeapons = [new Weapon('Shooting stars',
+        'stars.png',
+        10),
+        new Weapon('Rocket',
+        'rocket.png',
+        10)
 ];
+        
+
+const players = [new Player('Player1',
+        'alien.png', startWeapons[0]),
+    new Player('Player2',
+        'astronaut.png', startWeapons[1])
+];
+
 
 const weapons = [new Weapon('Asteroid',
         'asteroid.png',
@@ -40,7 +50,6 @@ export class App {
         return this.panels;
     }
 
-    
     initBoard(size) {
         this.board = new Board(size, players, weapons);
         return this.board;
