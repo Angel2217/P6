@@ -5,11 +5,11 @@ export class Weapon {
     this.damage = damage;
 
 
-    let myDiv = $('#' + name); 
+    let myDiv = $('#' + name);
     if (myDiv.length === 0) {
-      this.elem = this._createElem(); 
+      this.elem = this._createElem();
     } else {
-      this.elem = myDiv[0]; 
+      this.elem = myDiv[0];
     }
 
   }
@@ -19,9 +19,9 @@ export class Weapon {
       .attr('id', this.name)
       .addClass('weapon')
       .append('<div class="weapon-name">' + this.name + '</div>')
-      .append('<div class="weapon-image">' + this.image + '</div>')
+      .append('<div class="weapon-image">' + `<img src = images/${this.image}>` + '</div>') 
       .append('<div class="damage">' + this.damage + '</div>');
     return elem
   }
 
-} 
+}
