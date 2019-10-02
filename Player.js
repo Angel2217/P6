@@ -1,7 +1,9 @@
 export class Player {
-    constructor(name, image) {
+    constructor(name, image, weapon) {
       this.name = name;
       this.image = image;
+      this.weapon = weapon;
+    
   
   
       let myDiv = $('#' + name); 
@@ -19,9 +21,9 @@ export class Player {
         .attr('id', this.name)
         .addClass('player')
         .append('<div class="player-name">' + this.name + '</div>')
-        .append('<div class="player-image">' + `<img src = images/${this.image}>` + '</div>');
+        .append('<div class="player-image">' + `<img src = images/${this.image}>` + '</div>')
+        
       return elem
     }
     
-   
   } 
