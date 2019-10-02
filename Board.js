@@ -1,13 +1,13 @@
 import { Square } from './Square.js';
 
 
-
 export class Board {
     constructor(size, players, weapons) {
         this.size = size;
         this.players = players;
         this.weapons = weapons;
         this.table = this.createTable();
+        this.randomSquare = this.getRandomSquare();
         this.blockRandomSquare();
         this.placePlayer();
         this.placeWeapon();
@@ -31,13 +31,20 @@ export class Board {
         return tableElem
     }
 
+
+    getRandomSquare() {
+        let r = Math.floor(Math.random() * this.size);
+        let c = Math.floor(Math.random() * this.size);
+        let tdId = `sq_${r}_${c}`;
+        let square = Square.getById(tdId);
+        return square;
+    }
+
+
     blockRandomSquare() {
         var blockedCount = 0;
         while (blockedCount < 10) {
-            let r = Math.floor(Math.random() * this.size);
-            let c = Math.floor(Math.random() * this.size);
-            let tdId = `sq_${r}_${c}`;
-            let square = new Square(tdId);
+            let square = this.getRandomSquare();
             if (!square.blocked) {
                 square.blocked = true;
                 blockedCount++
@@ -49,17 +56,11 @@ export class Board {
     placePlayer() {
         let playerCount = 0;
         while (playerCount < 2) {
-            let r1 = Math.floor(Math.random() * this.size); // this part is too repetitive?
-            let r2 = Math.floor(Math.random() * this.size);
-            let c1 = Math.floor(Math.random() * this.size);
-            let c2 = Math.floor(Math.random() * this.size);
-            if (Math.abs(c2 - c1) > 1 || Math.abs(r2 - r1) > 1) { // this is to make sure the players are not close together
-                let tdId1 = `sq_${r1}_${c1}`;
-                let square1 = Square.getById(tdId1);
-                let tdId2 = `sq_${r2}_${c2}`;
-                let square2 = Square.getById(tdId2);
-                if (!square1.blocked && $('#' + tdId1).children().length === 0 && // I still have this problem, if I try to check !square1.player, I get errors: unrecognized expression # or unrecognized expression [object object]  
-                    !square2.blocked && $('#' + tdId2).children().length === 0) {
+            let square1 = this.getRandomSquare();
+            let square2 = this.getRandomSquare();
+            if (!this.playerIsNearby(square1, square2)) {
+                if (!square1.blocked && !square1.player &&
+                    !square2.blocked && !square2.player) {
                     square1.player = this.players[0];
                     square2.player = this.players[1];
                     playerCount++;
@@ -68,19 +69,28 @@ export class Board {
         }
     }
 
+    
+    playerIsNearby(square1, square2) {
+        let r1 = Number(($(square1).attr('id'))[3]);
+        let r2 = Number(($(square2).attr('id'))[3]);
+        let c1 = Number(($(square1).attr('id'))[5]);
+        let c2 = Number(($(square2).attr('id'))[5]);
+        if (Math.abs(r2 - r1) < 2 && Math.abs(c2 - c1) < 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     placeWeapon() {
-        let weaponCount = 0;
-        while (weaponCount < 4) {
-            let r = Math.floor(Math.random() * this.size);
-            let c = Math.floor(Math.random() * this.size);
-            let tdId = `sq_${r}_${c}`;
-            let square = Square.getById(tdId);
-            if (!square.blocked && $('#' + tdId).children().length === 0) { // same problem as above
+        while (this.weapons.length > 0) {
+            let square = this.getRandomSquare();
+            if (!square.blocked && !square.weapon && !square.player) {
                 let w = this.weapons.pop();
                 square.weapon = w;
-                weaponCount++;
             }
         }
     }
+    
 }
