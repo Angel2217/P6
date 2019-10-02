@@ -23,12 +23,14 @@ export class Square {
      get player() {
          let p = null;
          let td = $('#' + this.id + ' .player');
-         if (td) {
-             let name = $('.player-name', td).text();
+         if (td.length > 0) {
+             let elem = td[0];
+             let name = $(elem).attr('id');
              p = new Player(name);
          }
          return p
      }
+
 
      set player(p) {
          let td = $('#' + this.id)[0]; 
@@ -42,10 +44,11 @@ export class Square {
      get weapon() {
          let w = null;
          let td = $('#' + this.id + ' .weapon');
-         if (td) {
-             let name = $('.weapon-name', td).text();
-             let image = $('.weapon-image', td).text();
-             let damage = $('.damage', td).text();
+         if (td.length > 0) {
+             let elem = td[0];
+             let name = $(elem).attr('id');
+             let image = $('.weapon-image', elem).html();
+             let damage = $('.damage', elem).html();
              w = new Weapon(name, image, damage);
          }
          return w
