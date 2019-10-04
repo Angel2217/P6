@@ -1,7 +1,8 @@
 export class Player {
-    constructor(name, image, weapon) {
+    constructor(name, image, points, weapon) {
       this.name = name;
       this.image = image;
+      this.points = points;
       this.weapon = weapon;
     
   
@@ -26,4 +27,6 @@ export class Player {
       return elem
     }
     
-  } 
+
+      
+    
