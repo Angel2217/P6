@@ -63,9 +63,18 @@ export class Square {
          }
      }
 
+    
      static getById(id) {
          return new Square(id);
      }
 
+
+     get location() {
+        let loc = {
+            row: Number((this.id)[3]),
+            col: Number((this.id)[5])
+        }
+        return loc
+     }
 
  } 
