@@ -59,22 +59,21 @@ export class Board {
             let square1 = this.getRandomSquare();
             let square2 = this.getRandomSquare();
             if (!this.playerIsNearby(square1, square2)) {
-                if (!square1.blocked && !square1.player &&
-                    !square2.blocked && !square2.player) {
+                if (!square1.blocked && !square2.blocked) {
                     square1.player = this.players[0];
                     square2.player = this.players[1];
-                    playerCount++;
+                    playerCount += 2;
                 }
             }
         }
     }
 
-    
+
     playerIsNearby(square1, square2) {
-        let r1 = Number(($(square1).attr('id'))[3]);
-        let r2 = Number(($(square2).attr('id'))[3]);
-        let c1 = Number(($(square1).attr('id'))[5]);
-        let c2 = Number(($(square2).attr('id'))[5]);
+        let r1 = square1.location.row;
+        let r2 = square2.location.row;
+        let c1 = square1.location.col;
+        let c2 = square2.location.col;
         if (Math.abs(r2 - r1) < 2 && Math.abs(c2 - c1) < 2) {
             return true;
         } else {
@@ -92,5 +91,5 @@ export class Board {
             }
         }
     }
-    
+
 }
