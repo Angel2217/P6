@@ -7,16 +7,16 @@ import { Panel } from './Panel.js';
 const startWeapons = [new Weapon('Shooting stars',
         'stars.png',
         10),
-        new Weapon('Rocket',
+    new Weapon('Rocket',
         'rocket.png',
         10)
 ];
-        
+
 
 const players = [new Player('Player1',
-        'alien.png', startWeapons[0]),
+        'alien.png', 100, startWeapons[0]),
     new Player('Player2',
-        'astronaut.png', startWeapons[1])
+        'astronaut.png', 100, startWeapons[1])
 ];
 
 
@@ -38,22 +38,24 @@ const weapons = [new Weapon('Asteroid',
 export class App {
     constructor(size) {
         this.size = size;
-        this.panels = this.initPanel();
         this.board = this.initBoard(size);
+        this.panels = this.initPanel();
     }
 
-
-    initPanel() {
-        this.panels = [new Panel('Panel1', players[0]),
-                     new Panel('Panel2', players[1])
-        ];
-        return this.panels;
-    }
 
     initBoard(size) {
         this.board = new Board(size, players, weapons);
         return this.board;
     }
+
+
+    initPanel() {
+        this.panels = [new Panel('Panel1', '#myApp', players[0]),
+            new Panel('Panel2', '#myApp', players[1])
+        ];
+        return this.panels;
+    }
+
 
 
 }
