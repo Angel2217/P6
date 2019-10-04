@@ -12,13 +12,11 @@ table {
   margin-right: auto;
 }
 
-
 td {
   border: .1px solid white;
   height: 65px;
   width: 65px;
   text-align: center;
-
 }
 
 .blocked {
@@ -68,3 +66,4 @@ display: flex; flex-direction: row; }
 #Panel1{ order: 1; }
 #Panel2 { order: 3; }
 }
+
