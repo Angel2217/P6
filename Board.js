@@ -7,10 +7,12 @@ export class Board {
         this.players = players;
         this.weapons = weapons;
         this.table = this.createTable();
-        this.randomSquare = this.getRandomSquare();
+        this.getRandomSquare();
         this.blockRandomSquare();
         this.placePlayer();
         this.placeWeapon();
+        this.squares = this.checkValidSquares();
+        this.highlightValidSquares();
     }
 
 
@@ -35,8 +37,7 @@ export class Board {
     getRandomSquare() {
         let r = Math.floor(Math.random() * this.size);
         let c = Math.floor(Math.random() * this.size);
-        let tdId = `sq_${r}_${c}`;
-        let square = Square.getById(tdId);
+        let square = Square.getByLocation(r, c);
         return square;
     }
 
@@ -88,6 +89,39 @@ export class Board {
             if (!square.blocked && !square.weapon && !square.player) {
                 let w = this.weapons.pop();
                 square.weapon = w;
+            }
+        }
+    }
+
+
+    checkValidSquares() {
+        let squares = [[],[],[],[]];
+        let playerSquare = Square.getPlayerSquare();
+        playerSquare.player.playing = true;
+        let r = playerSquare.location.row;
+        let c = playerSquare.location.col;
+        for (let i = 1; i < 4; i++) {
+            let square = Square.getByLocation(r + i, c);
+            squares[0].push(square);
+            square = Square.getByLocation(r - i, c);
+            squares[1].push(square);
+            square = Square.getByLocation(r, c - i);
+            squares[2].push(square);
+            square = Square.getByLocation(r, c + i);
+            squares[3].push(square);
+        }
+        return squares
+    }
+
+
+    highlightValidSquares() {
+        for (let a = 0; a < this.squares.length; a++) {
+            for (let i = 0; i < this.squares[a].length; i++) {
+                if (!this.squares[a][i].blocked && !this.squares[a][i].player) {
+                    this.squares[a][i].active = true;
+                } else {
+                    break;
+                }
             }
         }
     }
