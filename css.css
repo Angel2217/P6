@@ -17,6 +17,7 @@ td {
   height: 65px;
   width: 65px;
   text-align: center;
+
 }
 
 .blocked {
@@ -67,3 +68,14 @@ display: flex; flex-direction: row; }
 #Panel2 { order: 3; }
 }
 
+.active {
+    -moz-box-shadow:    inset 0 0 9px #ffffff;
+    -webkit-box-shadow: inset 0 0 9px #ffffff;
+    box-shadow:         inset 0 0 9px #ffffff;
+}
+
+.playing {
+  -moz-box-shadow:    inset 0 0 7px #eeff00;
+  -webkit-box-shadow: inset 0 0 7px #eeff00;
+  box-shadow:         inset 0 0 7px #eeff00;
+}
