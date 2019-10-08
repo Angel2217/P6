@@ -27,6 +27,20 @@ export class Player {
       return elem
     }
     
-
-      
     
+    get playing() {
+        let elem = $('#' + this.name);
+        return $(elem).hasClass('playing');
+    }
+
+    set playing(bool) {
+        let elem = $('#' + this.name);
+        if (bool) {
+            $(elem).addClass('playing');
+        } else {
+            $(elem).removeClass('playing');
+        }
+    }
+
+    
+  } 
