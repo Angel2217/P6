@@ -7,12 +7,14 @@ export class Board {
         this.players = players;
         this.weapons = weapons;
         this.table = this.createTable();
-        this.getRandomSquare();
         this.blockRandomSquare();
         this.placePlayer();
         this.placeWeapon();
+        this.setActivePlayer();
         this.squares = this.checkValidSquares();
         this.highlightValidSquares();
+        this.movePlayer();
+        this.registerKeyHandler();
     }
 
 
@@ -94,36 +96,95 @@ export class Board {
     }
 
 
+    setActivePlayer() {
+        this.players[0].active = true;
+    }
+
+
     checkValidSquares() {
-        let squares = [[],[],[],[]];
-        let playerSquare = Square.getPlayerSquare();
-        playerSquare.player.playing = true;
+        let squares = [];
+        let playerSquare = Square.getActivePlayerSquare(true);
         let r = playerSquare.location.row;
         let c = playerSquare.location.col;
         for (let i = 1; i < 4; i++) {
+            let square = Square.getByLocation(r - i, c);
+            if (r - i > -1 && r - i < 8 && !square.blocked && !square.player) {
+                squares.push(square)
+            } else {
+                break
+            }
+        };
+        for (let i = 1; i < 4; i++) {
             let square = Square.getByLocation(r + i, c);
-            squares[0].push(square);
-            square = Square.getByLocation(r - i, c);
-            squares[1].push(square);
-            square = Square.getByLocation(r, c - i);
-            squares[2].push(square);
-            square = Square.getByLocation(r, c + i);
-            squares[3].push(square);
+            if (r + i > -1 && r + i < 8 && !square.blocked && !square.player) {
+                squares.push(square)
+            } else {
+                break
+            }
+        };
+        for (let i = 1; i < 4; i++) {
+            let square = Square.getByLocation(r, c - i);
+            if (c - i > -1 && c - i < 8 && !square.blocked && !square.player) {
+                squares.push(square)
+            } else {
+                break
+            }
+        };
+        for (let i = 1; i < 4; i++) {
+            let square = Square.getByLocation(r, c + i);
+            if (c + i > -1 && c + i < 8 && !square.blocked && !square.player) {
+                squares.push(square)
+            } else {
+                break
+            }
         }
         return squares
     }
 
 
     highlightValidSquares() {
-        for (let a = 0; a < this.squares.length; a++) {
-            for (let i = 0; i < this.squares[a].length; i++) {
-                if (!this.squares[a][i].blocked && !this.squares[a][i].player) {
-                    this.squares[a][i].active = true;
-                } else {
-                    break;
-                }
-            }
+        for (let i = 0; i < this.squares.length; i++) {
+            this.squares[i].valid = true;
         }
     }
+
+
+    movePlayer() {
+        var self = this;
+        $('.valid').click(function () {
+            let sq1 = Square.getActivePlayerSquare(true);
+            let p = sq1.player;
+            let tdId = $(this).attr('id');
+            let sq2 = Square.getById(tdId);
+            sq1.player = null;
+            sq2.player = p;
+            self.switchActivePlayer();
+        });
+    }
+
+
+    switchActivePlayer() {
+        this.unhighlightValidSquares();
+        let sq1 = Square.getActivePlayerSquare(true);
+        let p1 = sq1.player;
+        let sq2 = Square.getActivePlayerSquare(false);
+        let p2 = sq2.player;
+        p1.active = false;
+        p2.active = true;
+    }
+
+
+    unhighlightValidSquares() {
+        for (let i = 0; i < this.squares.length; i++) {
+            this.squares[i].valid = false;
+        }
+    }
+
+
+    registerKeyHandler() {
+        let keyHandlerWithThis = Board.prototype.movePlayer.bind(this);
+        $(document).on('click', keyHandlerWithThis);
+    }
+
 
 }
