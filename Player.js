@@ -41,3 +41,5 @@ export class Player {
             $(elem).removeClass('active');
         }
     }
+    
+}
