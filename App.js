@@ -44,16 +44,13 @@ export class App {
 
 
     initBoard(size) {
-        this.board = new Board(size, players, weapons);
-        return this.board;
+        return new Board(size, players, weapons);
     }
 
 
     initPanel() {
-        this.panels = [new Panel('Panel1', '#myApp', players[0]),
-            new Panel('Panel2', '#myApp', players[1])
-        ];
-        return this.panels;
+        return [new Panel('Panel1', '#myApp', players[0]),
+        new Panel('Panel2', '#myApp', players[1])]
     }
 
 
