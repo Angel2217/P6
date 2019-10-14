@@ -28,19 +28,16 @@ export class Player {
     }
     
     
-    get playing() {
+    get active() {
         let elem = $('#' + this.name);
-        return $(elem).hasClass('playing');
+        return $(elem).hasClass('active');
     }
 
-    set playing(bool) {
+    set active(bool) {
         let elem = $('#' + this.name);
         if (bool) {
-            $(elem).addClass('playing');
+            $(elem).addClass('active');
         } else {
-            $(elem).removeClass('playing');
+            $(elem).removeClass('active');
         }
     }
-
-    
-  } 
