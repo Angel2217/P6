@@ -4,13 +4,11 @@ import { Square } from './Square.js';
 export class Board {
     constructor(size, players, weapons) {
         this.size = size;
-        this.players = players;
-        this.weapons = weapons;
         this.table = this.createTable();
         this.blockRandomSquare();
-        this.placePlayer();
-        this.placeWeapon();
-        this.setActivePlayer();
+        this.placePlayer(players);
+        this.placeWeapon(weapons);
+        this.setActivePlayer(players);
         this.squares = this.checkValidSquares();
         this.highlightValidSquares();
         this.movePlayer();
@@ -56,15 +54,15 @@ export class Board {
     }
 
 
-    placePlayer() {
+    placePlayer(players) {
         let playerCount = 0;
         while (playerCount < 2) {
             let square1 = this.getRandomSquare();
             let square2 = this.getRandomSquare();
             if (!this.playerIsNearby(square1, square2)) {
                 if (!square1.blocked && !square2.blocked) {
-                    square1.player = this.players[0];
-                    square2.player = this.players[1];
+                    square1.player = players[0];
+                    square2.player = players[1];
                     playerCount += 2;
                 }
             }
@@ -85,19 +83,19 @@ export class Board {
     }
 
 
-    placeWeapon() {
-        while (this.weapons.length > 0) {
+    placeWeapon(weapons) {
+        while (weapons.length > 0) {
             let square = this.getRandomSquare();
             if (!square.blocked && !square.weapon && !square.player) {
-                let w = this.weapons.pop();
+                let w = weapons.pop();
                 square.weapon = w;
             }
         }
     }
 
 
-    setActivePlayer() {
-        this.players[0].active = true;
+    setActivePlayer(players) {
+        players[0].active = true;
     }
 
 
