@@ -70,6 +70,11 @@ export class Square {
     }
 
 
+    static getById(tdId) {
+        return new Square(tdId);
+
+    }
+
     get location() {
         let loc = {
             row: Number((this.id)[3]),
@@ -79,24 +84,37 @@ export class Square {
     }
 
 
-    static getPlayerSquare() {
-        let tdId = $('.player').parent().attr('id');
-        return new Square(tdId);
-    }
-
-
-    get active() {
-        let elem = $('#' + this.id);
-        return $(elem).hasClass('active');
-    }
-
-    set active(bool) {
-        let elem = $('#' + this.id);
-        if (bool) {
-            $(elem).addClass('active');
+    static getActivePlayerSquare(bool) {
+        let div = $('.player')[0];
+        let name = $(div).attr('id');
+        let p = new Player(name);
+        if (p.active === bool) {
+            let tdId = $(div).parent().attr('id');
+            return new Square(tdId);
         } else {
-            $(elem).removeClass('active');
+            let div = $('.player')[1];
+            let name = $(div).attr('id');
+            let p = new Player(name);
+            let tdId = $(div).parent().attr('id');
+            return new Square(tdId);
         }
     }
 
+
+    get valid() {
+        let elem = $('#' + this.id);
+        return $(elem).hasClass('valid');
+    }
+
+    set valid(bool) {
+        let elem = $('#' + this.id);
+        if (bool) {
+            $(elem).addClass('valid');
+        } else {
+            $(elem).removeClass('valid');
+        }
+    }
+
+
+    
 }
