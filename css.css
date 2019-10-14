@@ -12,6 +12,7 @@ table {
   margin-right: auto;
 }
 
+
 td {
   border: .1px solid white;
   height: 65px;
@@ -68,13 +69,13 @@ display: flex; flex-direction: row; }
 #Panel2 { order: 3; }
 }
 
-.active {
+.valid {
     -moz-box-shadow:    inset 0 0 9px #ffffff;
     -webkit-box-shadow: inset 0 0 9px #ffffff;
     box-shadow:         inset 0 0 9px #ffffff;
 }
 
-.playing {
+.active {
   -moz-box-shadow:    inset 0 0 7px #eeff00;
   -webkit-box-shadow: inset 0 0 7px #eeff00;
   box-shadow:         inset 0 0 7px #eeff00;
