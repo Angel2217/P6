@@ -8,11 +8,9 @@ export class Board {
         this.blockRandomSquare();
         this.placePlayer(players);
         this.placeWeapon(weapons);
-        this.setActivePlayer(players);
         this.squares = this.checkValidSquares();
         this.highlightValidSquares();
-        this.movePlayer();
-        this.registerKeyHandler();
+        this.clickHandler();
     }
 
 
@@ -64,6 +62,7 @@ export class Board {
                     square1.player = players[0];
                     square2.player = players[1];
                     playerCount += 2;
+                    players[0].active = true;
                 }
             }
         }
@@ -91,11 +90,6 @@ export class Board {
                 square.weapon = w;
             }
         }
-    }
-
-
-    setActivePlayer(players) {
-        players[0].active = true;
     }
 
 
@@ -144,31 +138,37 @@ export class Board {
         for (let i = 0; i < this.squares.length; i++) {
             this.squares[i].valid = true;
         }
+        this.registerClickHandler();
     }
 
 
-    movePlayer() {
-        var self = this;
-        $('.valid').click(function () {
-            let sq1 = Square.getActivePlayerSquare(true);
-            let p = sq1.player;
-            let tdId = $(this).attr('id');
-            let sq2 = Square.getById(tdId);
-            sq1.player = null;
-            sq2.player = p;
-            self.switchActivePlayer();
+    clickHandler() {
+        let self = this;
+        $('.valid').click(function (e) {
+            let tdId = $(e.target).attr('id');
+            self.movePlayer(tdId);
         });
     }
 
 
+    movePlayer(id) {
+        let sq1 = Square.getActivePlayerSquare(true);
+        let p = sq1.player;
+        let sq2 = Square.getById(id);
+        sq1.player = null;
+        sq2.player = p;
+        this.switchActivePlayer();
+    }
+
+
     switchActivePlayer() {
-        this.unhighlightValidSquares();
         let sq1 = Square.getActivePlayerSquare(true);
         let p1 = sq1.player;
         let sq2 = Square.getActivePlayerSquare(false);
         let p2 = sq2.player;
         p1.active = false;
         p2.active = true;
+        this.unhighlightValidSquares();
     }
 
 
@@ -179,9 +179,9 @@ export class Board {
     }
 
 
-    registerKeyHandler() {
-        let keyHandlerWithThis = Board.prototype.movePlayer.bind(this);
-        $(document).on('click', keyHandlerWithThis);
+    registerClickHandler() {
+        let clickHandlerWithThis = Board.prototype.clickHandler.bind(this);
+        $(document).on('click', clickHandlerWithThis);
     }
 
 
