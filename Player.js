@@ -23,7 +23,8 @@ export class Player {
         .addClass('player')
         .append('<div class="player-name">' + this.name + '</div>')
         .append('<div class="player-image">' + `<img src = images/${this.image}>` + '</div>')
-        
+        .append('<div class="player-points">' + this.points + '</div>')
+        .append('<div class="player-weapon">' + this.weapon + '</div>');
       return elem
     }
     
@@ -41,5 +42,7 @@ export class Player {
             $(elem).removeClass('active');
         }
     }
+  
     
-}
+    
+  } 
