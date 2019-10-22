@@ -6,6 +6,7 @@ export class Square {
         this.id = id;
     }
 
+
     get blocked() {
         let elem = $('#' + this.id);
         return $(elem).hasClass('blocked');
@@ -20,13 +21,25 @@ export class Square {
         }
     }
 
+
     get player() {
+        let weapon = null;
         let p = null;
         let td = $('#' + this.id + ' .player');
         if (td.length > 0) {
             let elem = td[0];
             let name = $(elem).attr('id');
-            p = new Player(name);
+            let image = $('.player-image', elem).html();
+            let points = $('.player-points', elem).html();
+            let w = $('#' + name + ' .weapon');
+            if (w.length > 0) {
+                let wElem = w[0];
+                let wName = $(wElem).attr('id');
+                let wImage = $('.weapon-image', wElem).html();
+                let wDamage = $('.damage', wElem).html();
+                weapon = new Weapon(wName, wImage, wDamage);
+            }
+            p = new Player(name, image, points, weapon);
         }
         return p
     }
@@ -41,6 +54,7 @@ export class Square {
         }
     }
 
+    
     get weapon() {
         let w = null;
         let td = $('#' + this.id + ' .weapon');
@@ -93,28 +107,40 @@ export class Square {
             return new Square(tdId);
         } else {
             let div = $('.player')[1];
-            let name = $(div).attr('id');
-            let p = new Player(name);
             let tdId = $(div).parent().attr('id');
             return new Square(tdId);
         }
     }
 
 
-    get valid() {
-        let elem = $('#' + this.id);
-        return $(elem).hasClass('valid');
+    setValid(handler) {
+        let elem = $('#' + this.id)[0];
+        $(elem).addClass('valid');
+        $(elem).click(handler);
     }
 
-    set valid(bool) {
+
+    resetValid() {
+        let elem = $('#' + this.id)[0];
+        $(elem).removeClass('valid');
+        $(elem).off();
+    }
+
+
+    get hidden() {
+        let elem = $('#' + this.id);
+        return $(elem).hasClass('hidden');
+    }
+
+    set hidden(bool) {
         let elem = $('#' + this.id);
         if (bool) {
-            $(elem).addClass('valid');
+            $(elem).addClass('hidden');
         } else {
-            $(elem).removeClass('valid');
+            $(elem).removeClass('hidden');
         }
     }
 
 
-    
+
 }
