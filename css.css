@@ -1,24 +1,26 @@
 body {
   background-color: black;
   color: white;
-  font-family: calibri;
+  font-family: 'Days One', sans-serif;
+  letter-spacing: 2px;
   margin: 20px 80px;
 }
 
 table {
+  background-color: rgba(0, 0, 15, 0.9);
   border: 3px solid white;
   border-collapse: collapse;
   margin-left: auto;
   margin-right: auto;
 }
 
-
 td {
   border: .1px solid white;
-  height: 65px;
-  width: 65px;
+  height: 68px;
+  width: 68px;
   text-align: center;
-
+  text-transform: uppercase;
+  font-size: 12px;
 }
 
 .blocked {
@@ -39,12 +41,26 @@ img {
   font-size: 13px
 }
 
+.player-points {
+  display: none;
+}
+
+.player-weapon {
+  display: none;
+}
+
 #title {
+  background: -webkit-linear-gradient(white, #0e765b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-size: 40px;
   text-align: center;
+  filter: drop-shadow(1px 1px rgb(240, 240, 240));
+  margin-bottom: -10px;
 }
 
 .panel {
+  background-color: rgba(0, 0, 15, 0.9);
   border: 3px solid white;
   width: 200px;
   height: 330px;
@@ -52,7 +68,7 @@ img {
   padding: 20px;
 }
 
-.panel > div {
+.panel>div {
   margin-bottom: 20px;
   text-transform: uppercase;
 }
@@ -63,20 +79,111 @@ img {
 }
 
 #myApp {
-display: flex; flex-direction: row; }
-#myTable { order: 2; }
-#Panel1{ order: 1; }
-#Panel2 { order: 3; }
+  display: flex;
+  flex-direction: row;
+}
+
+#myTable {
+  order: 2;
+}
+
+#Panel1 {
+  order: 1;
+}
+
+#Panel2 {
+  order: 3;
 }
 
 .valid {
-    -moz-box-shadow:    inset 0 0 9px #ffffff;
-    -webkit-box-shadow: inset 0 0 9px #ffffff;
-    box-shadow:         inset 0 0 9px #ffffff;
+  -moz-box-shadow: inset 0 0 9px #ffffff;
+  -webkit-box-shadow: inset 0 0 9px #ffffff;
+  box-shadow: inset 0 0 9px #ffffff;
 }
 
 .active {
-  -moz-box-shadow:    inset 0 0 7px #eeff00;
+  -moz-box-shadow: inset 0 0 7px #eeff00;
   -webkit-box-shadow: inset 0 0 7px #eeff00;
-  box-shadow:         inset 0 0 7px #eeff00;
+  box-shadow: inset 0 0 7px #eeff00;
+}
+
+.player .weapon {
+  display: none;
+}
+
+.hidden .weapon {
+  display: none;
+}
+
+
+@-webkit-keyframes BACKGROUND {
+  from {
+    top: 0;
+    left: 0;
+  }
+
+  to {
+    top: -5000px;
+    left: -5000px;
+  }
+}
+
+#space {
+  background: url(images/space.png) repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -400;
+
+  -webkit-animation-name: BACKGROUND;
+  -webkit-animation-duration: 300s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+#back {
+  background: url(images/back.png) repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -300;
+
+  -webkit-animation-name: BACKGROUND;
+  -webkit-animation-duration: 250s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+#middle {
+  background: url(images/middle.png) repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -200;
+
+  -webkit-animation-name: BACKGROUND;
+  -webkit-animation-duration: 200s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+#front {
+  background: url(images/front.png) repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -100;
+
+  -webkit-animation-name: BACKGROUND;
+  -webkit-animation-duration: 120s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
 }
