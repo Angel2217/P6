@@ -2,7 +2,8 @@ import { Square } from './Square.js';
 
 
 export class Board {
-    constructor(size, players, weapons) {
+    constructor(app, size, players, weapons) {
+        this.app = app;
         this.size = size;
         this.table = this.createTable();
         this.blockRandomSquare();
@@ -10,7 +11,6 @@ export class Board {
         this.placeWeapon(weapons);
         this.squares = this.checkValidSquares();
         this.highlightValidSquares();
-        this.clickHandler();
     }
 
 
@@ -101,7 +101,7 @@ export class Board {
         for (let i = 1; i < 4; i++) {
             let square = Square.getByLocation(r - i, c);
             if (r - i > -1 && r - i < 8 && !square.blocked && !square.player) {
-                squares.push(square)
+                squares.push(square);
             } else {
                 break
             }
@@ -109,7 +109,7 @@ export class Board {
         for (let i = 1; i < 4; i++) {
             let square = Square.getByLocation(r + i, c);
             if (r + i > -1 && r + i < 8 && !square.blocked && !square.player) {
-                squares.push(square)
+                squares.push(square);
             } else {
                 break
             }
@@ -117,7 +117,7 @@ export class Board {
         for (let i = 1; i < 4; i++) {
             let square = Square.getByLocation(r, c - i);
             if (c - i > -1 && c - i < 8 && !square.blocked && !square.player) {
-                squares.push(square)
+                squares.push(square);
             } else {
                 break
             }
@@ -125,7 +125,7 @@ export class Board {
         for (let i = 1; i < 4; i++) {
             let square = Square.getByLocation(r, c + i);
             if (c + i > -1 && c + i < 8 && !square.blocked && !square.player) {
-                squares.push(square)
+                squares.push(square);
             } else {
                 break
             }
@@ -135,29 +135,43 @@ export class Board {
 
 
     highlightValidSquares() {
+        let clickHandlerWithThis = Board.prototype.clickHandler.bind(this);
         for (let i = 0; i < this.squares.length; i++) {
-            this.squares[i].valid = true;
+            this.squares[i].setValid(clickHandlerWithThis);
         }
-        this.registerClickHandler();
     }
 
 
-    clickHandler() {
-        let self = this;
-        $('.valid').click(function (e) {
-            let tdId = $(e.target).attr('id');
-            self.movePlayer(tdId);
-        });
+    clickHandler(e) {
+        let tdId = $(e.currentTarget).attr('id');
+        let square = Square.getActivePlayerSquare(true);
+        let player = square.player;
+        this.movePlayer(tdId);
+        this.switchActivePlayer();
+        //this.app.updatePanel(player);
+        this.unhighlightValidSquares();
+        this.checkValidSquares();
+        this.squares = this.checkValidSquares();
+        this.highlightValidSquares();
     }
 
 
     movePlayer(id) {
         let sq1 = Square.getActivePlayerSquare(true);
-        let p = sq1.player;
+        sq1.hidden = false;
+        let p1 = sq1.player;
         let sq2 = Square.getById(id);
+        if (sq2.weapon) {
+            let w1 = p1.weapon;
+            let w2 = sq2.weapon;
+            p1.changeWeapon(w1, w2);
+            sq2.weapon = null;
+            sq2.weapon = w1;
+            sq2.hidden = true;
+            this.app.updatePanel(p1);
+        }
+        sq2.player = p1;
         sq1.player = null;
-        sq2.player = p;
-        this.switchActivePlayer();
     }
 
 
@@ -168,20 +182,13 @@ export class Board {
         let p2 = sq2.player;
         p1.active = false;
         p2.active = true;
-        this.unhighlightValidSquares();
     }
 
 
     unhighlightValidSquares() {
         for (let i = 0; i < this.squares.length; i++) {
-            this.squares[i].valid = false;
+            this.squares[i].resetValid();
         }
-    }
-
-
-    registerClickHandler() {
-        let clickHandlerWithThis = Board.prototype.clickHandler.bind(this);
-        $(document).on('click', clickHandlerWithThis);
     }
 
 
