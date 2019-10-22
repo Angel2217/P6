@@ -4,7 +4,7 @@ import { Weapon } from './Weapon.js';
 import { Panel } from './Panel.js';
 
 
-const startWeapons = [new Weapon('Shooting stars',
+const startWeapons = [new Weapon('ShootingStars',
         'stars.png',
         10),
     new Weapon('Rocket',
@@ -13,9 +13,9 @@ const startWeapons = [new Weapon('Shooting stars',
 ];
 
 
-const players = [new Player('Player1',
+const players = [new Player('alien',
         'alien.png', 100, startWeapons[0]),
-    new Player('Player2',
+    new Player('human',
         'astronaut.png', 100, startWeapons[1])
 ];
 
@@ -44,15 +44,25 @@ export class App {
 
 
     initBoard(size) {
-        return new Board(size, players, weapons);
+        return new Board(this, size, players, weapons);
     }
 
 
     initPanel() {
         return [new Panel('Panel1', '#myApp', players[0]),
-        new Panel('Panel2', '#myApp', players[1])]
+            new Panel('Panel2', '#myApp', players[1])
+        ];
     }
 
 
+    updatePanel(player) {
+        let playerName = $(player).attr('name');
+        let panelPlayer = $(this.panels[0].player).attr('name');
+        if (panelPlayer === playerName) {
+            this.panels[0].changePanel(player);
+        } else {
+            this.panels[1].changePanel(player);
+        }
+    }
 
 }
