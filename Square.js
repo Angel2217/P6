@@ -8,12 +8,13 @@ export class Square {
 
 
     get blocked() {
-        let elem = $('#' + this.id);
+        let elem = $('#' + this.id)[0];
         return $(elem).hasClass('blocked');
     }
 
+    
     set blocked(bool) {
-        let elem = $('#' + this.id);
+        let elem = $('#' + this.id)[0];
         if (bool) {
             $(elem).addClass('blocked');
         } else {
@@ -41,7 +42,7 @@ export class Square {
             }
             p = new Player(name, image, points, weapon);
         }
-        return p
+        return p;
     }
 
 
@@ -54,7 +55,7 @@ export class Square {
         }
     }
 
-    
+
     get weapon() {
         let w = null;
         let td = $('#' + this.id + ' .weapon');
@@ -65,7 +66,7 @@ export class Square {
             let damage = $('.damage', elem).html();
             w = new Weapon(name, image, damage);
         }
-        return w
+        return w;
     }
 
 
@@ -89,12 +90,13 @@ export class Square {
 
     }
 
+
     get location() {
         let loc = {
             row: Number((this.id)[3]),
             col: Number((this.id)[5])
         }
-        return loc
+        return loc;
     }
 
 
@@ -128,19 +130,19 @@ export class Square {
 
 
     get hidden() {
-        let elem = $('#' + this.id);
+        let elem = $('#' + this.id)[0];
         return $(elem).hasClass('hidden');
     }
 
+
     set hidden(bool) {
-        let elem = $('#' + this.id);
+        let elem = $('#' + this.id)[0];
         if (bool) {
             $(elem).addClass('hidden');
         } else {
             $(elem).removeClass('hidden');
         }
     }
-
 
 
 }
