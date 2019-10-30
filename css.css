@@ -1,81 +1,87 @@
 body {
-  background-color: black;
-  color: white;
-  font-family: 'Days One', sans-serif;
+  background-color: #04020d;
+  color: #ffffff;
+  font-family: 'Days One', sans-serif, 'Calibri';
   letter-spacing: 2px;
-  margin: 20px 80px;
-}
-
-table {
-  background-color: rgba(0, 0, 15, 0.9);
-  border: 3px solid white;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-td {
-  border: .1px solid white;
-  height: 68px;
-  width: 68px;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 12px;
-}
-
-.blocked {
-  background-color: #9818c5;
-}
-
-img {
-  padding-top: 3px;
-  height: 40px;
-  width: 40px;
-}
-
-.weapon-name {
-  display: none;
-}
-
-.damage {
-  font-size: 13px
-}
-
-.player-points {
-  display: none;
-}
-
-.player-weapon {
-  display: none;
 }
 
 #title {
-  background: -webkit-linear-gradient(white, #0e765b);
+  background: linear-gradient(white, #33ee22);
+  background-clip: text;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 40px;
+  color: transparent;
+  font-size: 43px;
   text-align: center;
-  filter: drop-shadow(1px 1px rgb(240, 240, 240));
-  margin-bottom: -10px;
+  filter: drop-shadow(1.5px 1.5px #f0f0f0);
+  letter-spacing: 8px;
+  margin-top: 20px;
+  margin-bottom: -20px;
 }
 
-.panel {
-  background-color: rgba(0, 0, 15, 0.9);
-  border: 3px solid white;
-  width: 200px;
-  height: 330px;
-  text-align: center;
-  padding: 20px;
+@-moz-document url-prefix() {
+  #title {
+    margin-top: -30px;
+  }
 }
 
-.panel>div {
-  margin-bottom: 20px;
-  text-transform: uppercase;
+@keyframes BACKGROUND {
+  from {
+    top: 0;
+    left: 0;
+  }
+
+  to {
+    top: -5000px;
+    left: -5000px;
+  }
 }
 
-.panel img {
-  width: 50px;
-  height: 50px;
+#space {
+  background: url(images/space.png);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -400;
+
+  animation: BACKGROUND 300s linear infinite;
+}
+
+#back {
+  background: url(images/back.png);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -300;
+
+  animation: BACKGROUND 250s linear infinite;
+}
+
+#middle {
+  background: url(images/middle.png) 7% 7%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -200;
+
+  animation: BACKGROUND 200s linear infinite;
+}
+
+#front {
+  background: url(images/front.png) 7% 7%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -100;
+
+  animation: BACKGROUND 100s linear infinite;
 }
 
 #myApp {
@@ -95,95 +101,181 @@ img {
   order: 3;
 }
 
+table {
+  background-color: rgba(0, 0, 15, .9);
+  border: 3px solid #ffffff;
+  border-collapse: collapse;
+  margin: auto;
+}
+
+td {
+  border: .1px solid #ffffff;
+  height: 68px;
+  width: 68px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+td img {
+  padding-top: 2px;
+  height: 40px;
+  width: 40px;
+}
+
+.blocked {
+  background-color: #54147f;
+}
+
 .valid {
-  -moz-box-shadow: inset 0 0 9px #ffffff;
-  -webkit-box-shadow: inset 0 0 9px #ffffff;
   box-shadow: inset 0 0 9px #ffffff;
 }
 
-.active {
-  -moz-box-shadow: inset 0 0 7px #eeff00;
-  -webkit-box-shadow: inset 0 0 7px #eeff00;
-  box-shadow: inset 0 0 7px #eeff00;
+.weapon-name {
+  display: none;
 }
 
-.player .weapon {
-  display: none;
+.damage {
+  font-size: 13px
 }
 
 .hidden .weapon {
   display: none;
 }
 
+.player-points {
+  display: none;
+}
 
-@-webkit-keyframes BACKGROUND {
-  from {
-    top: 0;
-    left: 0;
+.player .weapon {
+  display: none;
+}
+
+.active {
+  box-shadow: 0 0 2.5px 2px #21f12f;
+}
+
+.panel {
+  background-color: rgba(0, 0, 15, .9);
+  border: 3px solid #ffffff;
+  width: 200px;
+  height: 334px;
+  text-align: center;
+  padding: 20px;
+  margin: 0 70px;
+}
+
+.panel div {
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.panel-name {
+  font-size: 19px;
+  background: linear-gradient(white, #33ee22);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: drop-shadow(1.5px 1.5px #f0f0f0);
+}
+
+.panel img {
+  width: 50px;
+  height: 50px;
+}
+
+.panel-weapon-name {
+  font-size: 12px;
+}
+
+.points-number {
+  font-size: 20px;
+  margin-top: -6px;
+  animation: COLOR-CHANGE 1s infinite;
+}
+
+@keyframes COLOR-CHANGE {
+  0% {
+    color: white;
   }
 
-  to {
-    top: -5000px;
-    left: -5000px;
+  50% {
+    color: #994acd;
+  }
+
+  100% {
+    color: white;
   }
 }
 
-#space {
-  background: url(images/space.png) repeat;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -400;
-
-  -webkit-animation-name: BACKGROUND;
-  -webkit-animation-duration: 300s;
-  -webkit-animation-timing-function: linear;
-  -webkit-animation-iteration-count: infinite;
+.life-points {
+  height: 55px;
 }
 
-#back {
-  background: url(images/back.png) repeat;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -300;
-
-  -webkit-animation-name: BACKGROUND;
-  -webkit-animation-duration: 250s;
-  -webkit-animation-timing-function: linear;
-  -webkit-animation-iteration-count: infinite;
+.button {
+  background-color: #1dd82a;
+  font-family: inherit;
+  margin: 25px 0;
+  height: 50px;
+  width: 100px;
+  font-size: 17px;
+  transition-duration: .15s;
+  color: #04020d;
+  letter-spacing: 1.8px;
 }
 
-#middle {
-  background: url(images/middle.png) repeat;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -200;
-
-  -webkit-animation-name: BACKGROUND;
-  -webkit-animation-duration: 200s;
-  -webkit-animation-timing-function: linear;
-  -webkit-animation-iteration-count: infinite;
+.button:focus {
+  outline: none;
 }
 
-#front {
-  background: url(images/front.png) repeat;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -100;
+.defense {
+  background-color: rgba(0, 0, 15, .9);
+  color: #ffffff;
+}
 
-  -webkit-animation-name: BACKGROUND;
-  -webkit-animation-duration: 120s;
-  -webkit-animation-timing-function: linear;
-  -webkit-animation-iteration-count: infinite;
+.fighting {
+  box-shadow: 0 0 5px 1px #f0f0f0;
+}
+
+#game-over {
+  vertical-align: middle;
+  width: 100%;
+  white-space: nowrap;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+}
+
+#game-over p {
+  size: 50px;
+  display: inline-block;
+  text-transform: uppercase;
+  animation: GAMEOVER 4s linear forwards;
+}
+
+@keyframes GAMEOVER {
+  0% {
+    transform: scale(1, 1);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(3, 3);
+    opacity: .9;
+  }
+}
+
+#credits {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 10px;
+}
+
+a:link {
+  color: #54147f;
+}
+
+a:active {
+  color: #994acd;
 }
