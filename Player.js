@@ -6,7 +6,6 @@ export class Player {
     this.weapon = weapon;
 
 
-
     let myDiv = $('#' + name);
     if (myDiv.length === 0) {
       this.elem = this._createElem();
@@ -22,32 +21,34 @@ export class Player {
       .attr('id', this.name)
       .addClass('player')
       .append('<div class="player-name">' + this.name + '</div>')
-      .append('<div class="player-image">' + `<img src = images/${this.image}>` + '</div>')
+      .append('<div class="player-image">' + `<img src=images/${this.image}>` + '</div>')
       .append('<div class="player-points">' + this.points + '</div>')
       .append(this.weapon.elem);
-    return elem
+    return elem;
   }
 
 
   get active() {
-    let elem = $('#' + this.name);
+    let elem = $('#' + this.name)[0];
     return $(elem).hasClass('active');
   }
 
+
   set active(bool) {
-    let elem = $('#' + this.name);
+    let elem = $('#' + this.name)[0];
     if (bool) {
       $(elem).addClass('active');
     } else {
       $(elem).removeClass('active');
     }
   }
-  
+
 
   changeWeapon(prevWeapon, newWeapon) {
-    let p = $('#' + this.name);
+    let p = $('#' + this.name)[0];
     this.weapon = newWeapon;
     $(p).remove(prevWeapon.elem).append(newWeapon.elem);
   }
+
 
 }
