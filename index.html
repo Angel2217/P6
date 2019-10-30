@@ -1,27 +1,32 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <link href="css.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
-    <title>Board game</title>
+    <meta charset='utf-8'>
+    <link href='css.css' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Days+One&display=swap' rel='stylesheet'>
+    <title>SPACE QUEST</title>
 </head>
 
 <body>
-    <div id='space'></div>
-    <div id='back'></div>
-    <div id='middle'></div>
-    <div id='front'></div>
-    
-    <div id='title'>
-        <p>MY BOARD GAME!</p>
+    <div class='background' id='space'></div>
+    <div class='background' id='back'></div>
+    <div class='background' id='middle'></div>
+    <div class='background' id='front'></div>
+
+    <div id='wrapper'>
+        <div id='title'>
+            <p>&#10022 SPACE QUEST &#10022</p>
+        </div>
+
+        <div id='myApp'></div>
+        <div id='credits'><a target="_blank" href="https://www.vecteezy.com/free-vector/space">Space Vectors by
+                Vecteezy</a>
+            <a target="_blank" href="https://icons8.com">All Icons by Icons8</a>
+        </div>
     </div>
 
-    <div id='myApp'></div>
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="module">
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <script type='module'>
         import { App } from './App.js';
 
             $(function () {
@@ -30,3 +35,5 @@
        </script>
 
 </body>
+
+</html>
