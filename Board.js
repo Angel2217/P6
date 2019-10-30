@@ -5,7 +5,7 @@ export class Board {
     constructor(app, size, players, weapons) {
         this.app = app;
         this.size = size;
-        this.table = this.createTable();
+        this.table = this._createTable();
         this.blockRandomSquare();
         this.placePlayer(players);
         this.placeWeapon(weapons);
@@ -14,21 +14,21 @@ export class Board {
     }
 
 
-    createTable() {
-        var tableElem = $("<table>").appendTo('#myApp');
+    _createTable() {
+        var tableElem = $('<table>').appendTo('#myApp');
         $(tableElem).attr('id', 'myTable')
 
         for (let r = 0; r < this.size; r++) {
-            var row = $("<tr>").appendTo(tableElem);
+            var row = $('<tr>').appendTo(tableElem);
 
             for (let c = 0; c < this.size; c++) {
                 let tdId = `sq_${r}_${c}`;
-                $("<td>")
-                    .attr("id", tdId)
+                $('<td>')
+                    .attr('id', tdId)
                     .appendTo(row);
             }
         }
-        return tableElem
+        return tableElem;
     }
 
 
@@ -46,7 +46,7 @@ export class Board {
             let square = this.getRandomSquare();
             if (!square.blocked) {
                 square.blocked = true;
-                blockedCount++
+                blockedCount++;
             }
         }
     }
@@ -74,7 +74,8 @@ export class Board {
         let r2 = square2.location.row;
         let c1 = square1.location.col;
         let c2 = square2.location.col;
-        if (Math.abs(r2 - r1) < 2 && Math.abs(c2 - c1) < 2) {
+        if (Math.abs(r2 - r1) === 1 && Math.abs(c2 - c1) === 0 ||
+            Math.abs(r2 - r1) === 0 && Math.abs(c2 - c1) === 1) {
             return true;
         } else {
             return false;
@@ -103,7 +104,7 @@ export class Board {
             if (r - i > -1 && r - i < 8 && !square.blocked && !square.player) {
                 squares.push(square);
             } else {
-                break
+                break;
             }
         };
         for (let i = 1; i < 4; i++) {
@@ -111,7 +112,7 @@ export class Board {
             if (r + i > -1 && r + i < 8 && !square.blocked && !square.player) {
                 squares.push(square);
             } else {
-                break
+                break;
             }
         };
         for (let i = 1; i < 4; i++) {
@@ -119,7 +120,7 @@ export class Board {
             if (c - i > -1 && c - i < 8 && !square.blocked && !square.player) {
                 squares.push(square);
             } else {
-                break
+                break;
             }
         };
         for (let i = 1; i < 4; i++) {
@@ -127,10 +128,10 @@ export class Board {
             if (c + i > -1 && c + i < 8 && !square.blocked && !square.player) {
                 squares.push(square);
             } else {
-                break
+                break;
             }
         }
-        return squares
+        return squares;
     }
 
 
@@ -144,15 +145,12 @@ export class Board {
 
     clickHandler(e) {
         let tdId = $(e.currentTarget).attr('id');
-        let square = Square.getActivePlayerSquare(true);
-        let player = square.player;
-        this.movePlayer(tdId);
-        this.switchActivePlayer();
-        //this.app.updatePanel(player);
-        this.unhighlightValidSquares();
-        this.checkValidSquares();
-        this.squares = this.checkValidSquares();
-        this.highlightValidSquares();
+        if (this.movePlayer(tdId)) {
+            this.switchActivePlayer();
+            this.unhighlightValidSquares();
+            this.squares = this.checkValidSquares();
+            this.highlightValidSquares();
+        }
     }
 
 
@@ -172,6 +170,14 @@ export class Board {
         }
         sq2.player = p1;
         sq1.player = null;
+        let otherPlayerSq = Square.getActivePlayerSquare(false);
+        if (this.playerIsNearby(sq2, otherPlayerSq)) {
+            this.enterFightMode(p1);
+            return false;
+        } else {
+            return true;
+        }
+
     }
 
 
@@ -189,6 +195,12 @@ export class Board {
         for (let i = 0; i < this.squares.length; i++) {
             this.squares[i].resetValid();
         }
+    }
+
+
+    enterFightMode(p1) {
+        this.app.setButtons(p1);
+        this.unhighlightValidSquares();
     }
 
 
