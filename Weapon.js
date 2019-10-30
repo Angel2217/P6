@@ -14,14 +14,16 @@ export class Weapon {
 
   }
 
+
   _createElem() {
     let elem = $('<div>')
       .attr('id', this.name)
       .addClass('weapon')
       .append('<div class="weapon-name">' + this.name + '</div>')
-      .append('<div class="weapon-image">' + `<img src = images/${this.image}>` + '</div>') 
+      .append('<div class="weapon-image">' + `<img src=images/${this.image}>` + '</div>')
       .append('<div class="damage">' + this.damage + '</div>');
     return elem
   }
+
 
 }
