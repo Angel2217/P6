@@ -3,6 +3,7 @@ body {
   color: #ffffff;
   font-family: 'Days One', sans-serif, 'Calibri';
   letter-spacing: 2px;
+  cursor: context-menu;
 }
 
 #title {
@@ -110,6 +111,8 @@ table {
 
 td {
   border: .1px solid #ffffff;
+  min-width: 68px;
+  min-height: 68px;
   height: 68px;
   width: 68px;
   text-align: center;
@@ -160,9 +163,11 @@ td img {
   border: 3px solid #ffffff;
   width: 200px;
   height: 334px;
+  min-height: 334px;
   text-align: center;
   padding: 20px;
   margin: 0 70px;
+  font-size: 15.5px;
 }
 
 .panel div {
@@ -210,6 +215,7 @@ td img {
 
 .life-points {
   height: 55px;
+  padding-bottom: 5px;
 }
 
 .button {
@@ -241,13 +247,14 @@ td img {
   vertical-align: middle;
   width: 100%;
   white-space: nowrap;
-  position: relative;
+  position: fixed;
   top: 50%;
   transform: translateY(-50%);
   text-align: center;
 }
 
 #game-over p {
+  height: 110%;
   size: 50px;
   display: inline-block;
   text-transform: uppercase;
