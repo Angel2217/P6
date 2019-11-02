@@ -74,8 +74,8 @@ export class Board {
         let r2 = square2.location.row;
         let c1 = square1.location.col;
         let c2 = square2.location.col;
-        if (Math.abs(r2 - r1) === 1 && Math.abs(c2 - c1) === 0 ||
-            Math.abs(r2 - r1) === 0 && Math.abs(c2 - c1) === 1) {
+        if (Math.abs(r2 - r1) < 2 && Math.abs(c2 - c1) === 0 ||
+            Math.abs(r2 - r1) === 0 && Math.abs(c2 - c1) < 2) {
             return true;
         } else {
             return false;
