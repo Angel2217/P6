@@ -1,4 +1,3 @@
-
 export class Panel {
   constructor(id, div, player) {
     this.id = id;
