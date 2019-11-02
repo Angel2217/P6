@@ -143,8 +143,8 @@ export class App {
 
 
     gameOver() {
-        $('#wrapper').fadeOut(1100);
-        $('.background').fadeOut(3500);
+        $('#wrapper').fadeTo(1100, 0);
+        $('.background').fadeTo(3500, 0);
         $('body').append('<div id="game-over"><p>galaxy over</p></div>');
     }
 
