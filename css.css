@@ -3,7 +3,7 @@ body {
   color: #ffffff;
   font-family: 'Days One', sans-serif, 'Calibri';
   letter-spacing: 2px;
-  cursor: context-menu;
+  cursor: default;
 }
 
 #title {
@@ -132,6 +132,7 @@ td img {
 
 .valid {
   box-shadow: inset 0 0 9px #ffffff;
+  cursor: pointer;
 }
 
 .weapon-name {
@@ -241,6 +242,7 @@ td img {
 
 .fighting {
   box-shadow: 0 0 5px 1px #f0f0f0;
+  cursor: pointer;
 }
 
 #game-over {
